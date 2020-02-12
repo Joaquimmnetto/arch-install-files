@@ -2,20 +2,20 @@
 timedatectl set-ntp true
 
 #partition config
-sfdisk /dev/sda < sda-part.dump
+#sfdisk /dev/sda < sda-part.dump
 #format
-mkfs.ext4 /dev/sda2
-mkfs.fat -F 32 /dev/sda1
+#mkfs.ext4 /dev/sda2
+#mkfs.fat -F 32 /dev/sda1
 #mounting
-mkdir /mnt/boot
-mount /dev/sda2 /mnt
-mount /dev/sda1 /mnt/boot
+#mkdir /mnt/boot
+#mount /dev/sda2 /mnt
+#mount /dev/sda1 /mnt/boot
 #installing basics
-pacstrap /mnt base linux linux-firmware man-db man-pages texinfo
+#pacstrap /mnt base linux linux-firmware man-db man-pages texinfo
 #fstab
 genfstab /mnt >> /mnt/etc/fstab
 #installing network/sound/utils
-pacstrap /mnt efibootmgr vim dhcpcd pulseaudio
+pacstrap /mnt efibootmgr vim dhcpcd pulseaudio pulseaudio-alsa
 
 #get part uuid
 set PART_UUID=$(eval "blkid -s UUID -o value /dev/sda2")
