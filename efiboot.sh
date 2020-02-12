@@ -7,7 +7,6 @@ sfdisk /dev/sda < sda-part.dump
 mkfs.ext4 /dev/sda2
 mkfs.fat -F 32 /dev/sda1
 #mounting
-mkdir /mnt
 mkdir /mnt/boot
 mount /dev/sda2 /mnt
 mount /dev/sda1 /mnt/boot
