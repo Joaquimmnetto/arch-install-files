@@ -22,21 +22,3 @@ echo "fstab generator"
 echo "Adding EFI boot entry ($PART_UUID)"
 PART_UUID=$(blkid -s UUID -o value /dev/sda2)
 efibootmgr --create --disk /dev/sda --part 1 --label "Arch Linux" --loader /vmlinuz-linux --unicode "root=PARTUUID=$PART_UUID rw initrd=\initramfs-linux.img" --verbose
-
-echo "Changing root to newly installed system"
-arch-chroot /mnt
-echo "Datetime/keymapping config" 
-ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
-hwclock --systohc
-echo KEYMAP=br-abnt2 >> /etc/vconsole.conf
-
-echo "Installing network/sound/utils"
-pacman -Sy efibootmgr git sudo dhcpcd wget pulseaudio pulseaudio-alsa lib32-alsa-plugins lib32-libpulse
-rmmod snd_pcm_oss
-
-echo "Enabling dhcpd"
-systemctl enable dhcpcd
-
-echo "Creating new user"
-useradd joaquim
-echo
