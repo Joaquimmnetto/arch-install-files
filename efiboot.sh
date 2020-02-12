@@ -13,7 +13,7 @@ mkdir /mnt/boot
 mount /dev/sda2 /mnt
 mount /dev/sda1 /mnt/boot
 
-echo("Installing kernel + basics")
+echo "Installing kernel + basics"
 pacstrap /mnt base linux linux-firmware man-db man-pages texinfo efibootmgr vim
 
 echo "fstab generator"
@@ -31,7 +31,7 @@ ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 echo KEYMAP=br-abnt2 >> /etc/vconsole.conf
 
-echo("Installing network/sound/utils")
+echo "Installing network/sound/utils"
 pacman -Sy efibootmgr git sudo dhcpcd wget pulseaudio pulseaudio-alsa lib32-alsa-plugins lib32-libpulse
 rmmod snd_pcm_oss
 
